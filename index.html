@@ -1,0 +1,76 @@
+<!DOCTYPE html>  
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    		<style type="text/css">
+    			.contenedor-botones {
+    				width: 300px;
+    				height: 200px;
+    			}
+    		</style>
+            <script>  
+                (function(d,s,id) {  
+                    var js, fjs = d.getElementsByTagName(s)[0];  
+                    if(d.getElementById(id)) return;  
+                    js = d.createElement(s); js.id = id;  
+                    js.src = "http://connect.facebook.net/en_US/sdk.js";  
+                    fjs.parentNode.insertBefore(js, fjs);  
+                }(document, 'script', 'facebook-jssdk'));  
+      
+                window.fbAsyncInit = function() {  
+                    FB.init({  
+                        appId : '420386148713270',  
+                        cookie : true,  
+                        xfbml : true,  
+                        version : 'v2.0'  
+                    });  
+                }  
+      
+                function ingresar() {  
+                    FB.login(function(respuesta){  
+                        validarUsuario();  
+                    }, {scope: 'public_profile, email'});  
+                }  
+                function validarUsuario() {  
+                    FB.getLoginStatus(function(respuesta) {  
+                        if(respuesta.status == 'connected') {  
+                            FB.api('/me', function(respuesta) {  
+                                alert('Bienvenido ' + respuesta.name);  
+                            });  
+                        } else if(respuesta.status == 'not_authorized') {  
+                            alert('Debes autorizar la app!');  
+                        } else {  
+                            alert('Debes ingresar a tu cuenta de Facebook!');  
+                        }  
+                    });  
+               }  
+      
+            </script>  
+        </head>  
+        <body>  
+            <div class="container mt-5">
+            	<div class="row">
+            		<div class="col-md-12">
+            			<h1>Inicia Sesión via Facebook</h1>
+            		 	<div class="contenedor-botones">
+            		 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" class="btn btn-block"> </fb:login-button>  
+            				<button onclick="ingresar();" class="btn btn-primary btn-block">Ingresar con Facebook</button> 
+            		 	</div>
+            		</div>	
+            	</div>
+            </div>
+
+
+
+
+                <!-- Optional JavaScript -->
+		    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        </body>  
+    </html>  
